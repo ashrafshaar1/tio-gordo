@@ -24,12 +24,12 @@ body::before {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: scroll; /* Changed from fixed to scroll for better performance */
+  background-attachment: scroll;
   opacity: 0.6;
   z-index: -1;
   pointer-events: none;
-  will-change: transform; /* Optimizes rendering */
-  transform: translateZ(0); /* Forces hardware acceleration */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .app {
@@ -132,7 +132,7 @@ body::before {
   align-items: center;
   gap: 0.15rem;
   min-width: 70px;
-  max-width: 105px;
+  max-width: 110px;
   color: #2c3e50;
   position: relative;
   border-radius: 20px;
@@ -164,6 +164,7 @@ body::before {
   background: transparent;
 }
 
+/* Fixed category text wrapping - prevents "s" on new line */
 .category-name {
   font-size: 0.7rem;
   font-weight: 600;
@@ -176,6 +177,8 @@ body::before {
   width: 100%;
   line-height: 1.2;
   margin-bottom: 2px;
+  overflow-wrap: break-word;
+  word-break: keep-all; /* Prevents breaking words like "Sandwiches" */
 }
 
 .category-name-ar {
@@ -252,7 +255,7 @@ body::before {
   width: 100%;
   min-width: 0;
   backdrop-filter: blur(2px);
-  transform: translateZ(0); /* Hardware acceleration */
+  transform: translateZ(0);
 }
 
 .menu-item:hover {
@@ -284,8 +287,9 @@ body::before {
   overflow: hidden;
 }
 
+/* FIXED: Smaller font for English titles on all screens */
 .item-name-en {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: #E53935;
   margin-bottom: 0.2rem;
@@ -303,7 +307,7 @@ body::before {
 }
 
 .item-name-ar {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
   color: #E53935;
   direction: rtl;
@@ -320,10 +324,10 @@ body::before {
 }
 
 .item-price {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #6B8E23;
-  padding: 0.4rem 0.8rem;
+  padding: 0.3rem 0.7rem;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 20px;
   white-space: nowrap;
@@ -509,7 +513,7 @@ body::before {
   
   .category-btn {
     min-width: 68px;
-    max-width: 98px;
+    max-width: 100px;
     padding: 0.35rem 0.4rem 0.7rem 0.4rem;
   }
   
@@ -519,6 +523,20 @@ body::before {
   
   .category-name-ar {
     font-size: 0.58rem;
+  }
+  
+  /* Smaller font for English titles on tablet */
+  .item-name-en {
+    font-size: 0.85rem;
+  }
+  
+  .item-name-ar {
+    font-size: 0.8rem;
+  }
+  
+  .item-price {
+    font-size: 0.95rem;
+    padding: 0.25rem 0.6rem;
   }
 }
 
@@ -534,7 +552,7 @@ body::before {
   
   .category-btn {
     min-width: 65px;
-    max-width: 90px;
+    max-width: 95px;
     padding: 0.35rem 0.3rem 0.65rem 0.3rem;
   }
   
@@ -544,6 +562,25 @@ body::before {
   
   .category-name-ar {
     font-size: 0.55rem;
+  }
+  
+  /* Smaller font for English titles on mobile */
+  .item-name-en {
+    font-size: 0.8rem;
+  }
+  
+  .item-name-ar {
+    font-size: 0.75rem;
+  }
+  
+  .item-price {
+    font-size: 0.9rem;
+    padding: 0.25rem 0.5rem;
+  }
+  
+  .item-image {
+    width: 60px;
+    height: 60px;
   }
 }
 
@@ -555,7 +592,7 @@ body::before {
   
   .category-btn {
     min-width: 62px;
-    max-width: 85px;
+    max-width: 90px;
     padding: 0.3rem 0.25rem 0.6rem 0.25rem;
   }
   
@@ -584,18 +621,18 @@ body::before {
 
   .category-btn {
     min-width: 58px;
-    max-width: 80px;
+    max-width: 85px;
     padding: 0.3rem 0.2rem 0.55rem 0.2rem;
   }
 
   .category-name {
     font-size: 0.6rem;
-    line-height: 1.1;
+    line-height: 1.2;
   }
 
   .category-name-ar {
     font-size: 0.5rem;
-    line-height: 1.1;
+    line-height: 1.2;
   }
 
   .category-title {
@@ -604,14 +641,33 @@ body::before {
 
   .menu-items {
     grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+  
+  .menu-item {
+    padding: 0.8rem;
+    gap: 0.6rem;
   }
 
+  /* Even smaller font for English titles on small phones */
   .item-name-en {
-    font-size: 0.9rem;
+    font-size: 0.75rem;
+    -webkit-line-clamp: 2;
   }
 
   .item-name-ar {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
+    -webkit-line-clamp: 2;
+  }
+  
+  .item-price {
+    font-size: 0.85rem;
+    padding: 0.2rem 0.5rem;
+  }
+  
+  .item-image {
+    width: 55px;
+    height: 55px;
   }
 
   .modal-name-en {
@@ -630,7 +686,7 @@ body::before {
 
   .category-btn {
     min-width: 52px;
-    max-width: 70px;
+    max-width: 75px;
     padding: 0.25rem 0.15rem 0.5rem 0.15rem;
   }
 
@@ -640,6 +696,24 @@ body::before {
 
   .category-name-ar {
     font-size: 0.45rem;
+  }
+  
+  .item-name-en {
+    font-size: 0.7rem;
+  }
+  
+  .item-name-ar {
+    font-size: 0.65rem;
+  }
+  
+  .item-price {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.4rem;
+  }
+  
+  .item-image {
+    width: 50px;
+    height: 50px;
   }
 
   .menu-item {
