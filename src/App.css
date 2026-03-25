@@ -12,7 +12,7 @@ body {
   min-height: 100vh;
 }
 
-/* Add background image */
+/* Add background image - FIXED for better performance */
 body::before {
   content: '';
   position: fixed;
@@ -24,10 +24,12 @@ body::before {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: scroll; /* Changed from fixed to scroll for better performance */
   opacity: 0.6;
   z-index: -1;
   pointer-events: none;
+  will-change: transform; /* Optimizes rendering */
+  transform: translateZ(0); /* Forces hardware acceleration */
 }
 
 .app {
@@ -250,6 +252,7 @@ body::before {
   width: 100%;
   min-width: 0;
   backdrop-filter: blur(2px);
+  transform: translateZ(0); /* Hardware acceleration */
 }
 
 .menu-item:hover {
