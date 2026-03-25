@@ -34,38 +34,24 @@ const menuData = {
     { id: 25, name: 'Makanek', nameAr: 'مقانق', price: '$6.18', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Falafel', description: 'Makanek, Mayo, Pickles, Tomato, Debs Reman.', descriptionAr: 'مقانق، مايونيز، كبيس، طماطم، دبس الرمان.' },
     { id: 26, name: 'Crab', nameAr: 'كراب', price: '$6.75', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Falafel', description: 'Crab, Mayo, Lettuce, pickles, Soya Sauce, Cocktail Sauce.', descriptionAr: 'كراب، مايونيز، خس، كبيس، صلصة صويا، صلصة كوكتيل.' },
     { id: 27, name: 'Shrimps', nameAr: 'قريدس', price: '$6.75', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Falafel', description: 'Shrimps, Mayo, Lettuce, pickles, Soya Sauce, Cocktail Sauce.', descriptionAr: 'قريدس، مايونيز، خس، كبيس، صلصة صويا، صلصة كوكتيل.' },
-    { id: 28, name: 'Crab & Shrimps', nameAr: 'كراب & قريدس', price: '$6.75', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Falafel', description: 'Crab & Shrimps, Mayo, Lettuce, pickles, Soya Sauce, Cocktail Sauce.', descriptionAr: 'كراب وقريدس، مايونيز، خس، كبيس، صلصة الصويا، صلصة كوكتيل.' },
-  ],
-  platters: [
-    { id: 29, name: 'Chicken Shawarma Tabliye', nameAr: 'طبلية شاورما دجاج', price: '$6.18', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, pickles, Garlic.', descriptionAr: 'يقدّم مع بطاطا مقلية، كبيس، ثوم.' },
-    { id: 30, name: 'Beef Shawarma Tabliye', nameAr: 'طبلية شاورما لحمة', price: '$6.75', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with Tarator Sauce, Tomato, Debs reman, Onions, Parsley.', descriptionAr: 'يقدّم مع طرطور، طماطم، دبس الرمان، بصل وبقدونس.' },
-    { id: 31, name: 'Sejok Shawarma Tabliye', nameAr: 'طبلية شاورما سجق', price: '$6.18', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, pickles, Tomato, Garlic.', descriptionAr: 'يقدّم مع بطاطا مقلية، كبيس، طماطم، ثوم.' },
-    { id: 29, name: 'Chicken Shawarma Platter 250g', nameAr: 'طبق شاورما دجاج 250غ', price: '$9', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, pickles, Garlic.', descriptionAr: 'يقدّم مع بطاطا مقلية، كبيس، ثوم.' },
-    { id: 29, name: 'Chicken Shawarma Platter 500g', nameAr: 'طبق شاورما دجاج 500غ', price: '$18', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, pickles, Garlic.', descriptionAr: 'يقدّم مع بطاطا مقلية، كبيس، ثوم.' },
-    { id: 29, name: 'Chicken Shawarma Platter 1Kg', nameAr: 'طبق شاورما دجاج 1كغ', price: '$33.70', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, pickles, Garlic.', descriptionAr: 'يقدّم مع بطاطا مقلية، كبيس، ثوم.' },
-    { id: 30, name: 'Beef Shawarma Platter 250g', nameAr: 'طبق شاورما لحمة 250غ', price: '$12.36', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, Tarator Sauce, Tomato, Debs reman, Onions, Parsley.', descriptionAr: 'يقدّم مع بطاطا مقلية، طرطور، طماطم، دبس الرمان، بصل وبقدونس.' },
-    { id: 30, name: 'Beef Shawarma Platter 500g', nameAr: 'طبق شاورما لحمة 500غ', price: '$20.23', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, Tarator Sauce, Tomato, Debs reman, Onions, Parsley.', descriptionAr: 'يقدّم مع بطاطا مقلية، طرطور، طماطم، دبس الرمان، بصل وبقدونس.' },
-    { id: 30, name: 'Beef Shawarma Platter 1Kg', nameAr: 'طبق شاورما لحمة 1كغ', price: '$39.33', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, Tarator Sauce, Tomato, Debs reman, Onions, Parsley.', descriptionAr: 'يقدّم مع بطاطا مقلية، طرطور، طماطم، دبس الرمان، بصل وبقدونس.' },
-    { id: 29, name: 'Sejok Shawarma Platter 250g', nameAr: 'طبق شاورما دجاج 250غ', price: '$10.11', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, Tomato, pickles, Garlic.', descriptionAr: 'يقدّم مع بطاطا مقلية، طماطم، كبيس، ثوم.' },
-    { id: 29, name: 'Sejok Shawarma Platter 500g', nameAr: 'طبق شاورما دجاج 500غ', price: '$20.22', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, Tomato, pickles, Garlic.', descriptionAr: 'يقدّم مع بطاطا مقلية، طماطم، كبيس، ثوم.' },
-    { id: 29, name: 'Sejok Shawarma Platter 1Kg', nameAr: 'طبق شاورما دجاج 1كغ', price: '$39.33', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, Tomato, pickles, Garlic.', descriptionAr: 'يقدّم مع بطاطا مقلية، طماطم، كبيس، ثوم.' },
-    { id: 32, name: 'Crispy Platter Large', nameAr: 'طبق كرسبي كبير', price: '$10.11', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Grill', description: '6 Crispy Pcs Served with coleslaw, French Fries, garlic sauce, BBQ sauce, cheddar.', descriptionAr: '6 قطع كرسبي تقدّم مع سلطة الكول سلو، بطاطا مقلية، ثوم، صوص باربكيو، جبن الشيدر.' },
-    { id: 33, name: 'Crispy Platter Small', nameAr: 'طبق كرسبي صغير', price: '$7.87', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Grill', description: '4 Crispy Pcs Served with coleslaw, French Fries, garlic sauce, BBQ sauce, cheddar.', descriptionAr: '4 قطع كرسبي تقدّم مع سلطة الكول سلو، بطاطا مقلية، ثوم، صوص باربكيو، جبن الشيدر.' },
-    { id: 34, name: 'Steak Mushroom Platter', nameAr: 'طبق ستيك والفطر', price: '$14.61', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Kafta', description: 'Served with Fresh Mushroom Sauce, French Fries, Red lettuce.', descriptionAr: 'يقدّم مع صلصة الفطر الطازج، بطاطا مقلية، الخس الأحمر.' },
-    { id: 34, name: 'Tawook Platter', nameAr: 'طبق طاووق', price: '$10.11', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Kafta', description: '300g Tawook Served with French Fries, Garlic sauce, pickles.', descriptionAr: '300غ طاووق تقدم مع بطاطا مقلية، ثوم، كبيس ' },
-    { id: 34, name: 'Sawda Platter', nameAr: 'طبق سودة', price: '$10.11', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Kafta', description: '300g Chicken Sawda Served with French Fries, Garlic sauce, pickles, Debs reman.', descriptionAr: '300غ سودة دجاج تقدم مع بطاطا مقلية، ثوم، كبيس و دبس الرمان دبس.' },
-    { id: 34, name: 'Chicken Breast Platter', nameAr: 'طبق صدر دجاج', price: '$14.61', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Kafta', description: '4 Grilled Chicken Pcs Served with Vegetable salad, Special sauce, garlic sauce.', descriptionAr: 'أربع قطع دجاج مشوي تقدم مع سلطة خضار، وصلصة خاصة، وصلصة ثوم.' },
-    { id: 34, name: 'Escalop Platter', nameAr: 'طبق اسكالوب', price: '$10.11', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Kafta', description: '2 Escalop pcs Served with French Fries, coleslaw, Ketchup, Cheddar Cheese.', descriptionAr: 'قطعتان من اسكالوب تقدم مع البطاطس المقلية، وسلطة الكول سلو، كاتشب، جبنة الشيدر.' },    
+    { id: 28, name: 'Crab & Shrimps', nameAr: 'كراب & قريدس', price: '$6.75', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Falafel', description: 'Crab & Shrimps, Mayo, Lettuce, pickles, Soya Sauce, Cocktail Sauce.', descriptionAr: 'كراب وقريدس، مايونيز، خس، كبيس، صلصة الصويا، صلصة الكوكتيل.' },
   ],
   burgers: [
-    { id: 35, name: 'Lebanese Burger', nameAr: 'برغر لبناني', price: '$5.06', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Burger', description: 'Beef patty, Mayo Sauce, Coleslaw, Mustard, Ketchup, French fries, Grilled Tomato and Onions.', descriptionAr: 'شريحة لحم بقري، صلصة مايونيز، سلطة كول سلو، خردل، كاتشب، بطاطا مقلية، طماطم وبصل مشوي.' },
-    { id: 36, name: 'Cheese Burger', nameAr: 'برغر بالجبنة', price: '$5.62', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Burger', description: 'Beef patty, Mayo Sauce, Coleslaw, Mustard, Ketchup, French fries, Grilled Tomato and Onions, Mozzarella Cheese.', descriptionAr: 'شريحة لحم بقري، صلصة مايونيز، سلطة كول سلو، خردل، كاتشب، بطاطا مقلية، طماطم وبصل مشوي، جبنة موزاريلا.' },
-    { id: 37, name: 'Chicken Pesto Burger', nameAr: 'برغر دجاج بيستو', price: '$6.74', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Burger', description: 'Grilled chicken breast, pesto sauce, Avocado Sauce.', descriptionAr: 'صدر دجاج مشوي، صلصة بيستو، صلصة أفوكادو.' },
-    { id: 38, name: 'Chicken Mushroom Burger', nameAr: 'برغر دجاج بالفطر', price: '$6.74', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Burger', description: 'Grilled Chicken Breast, Mushroom Sauce, Mayo sauce, Mozzarella Cheese.', descriptionAr: 'صدر دجاج مشوي، صلصة الفطر، صلصة المايونيز، جبنة الموزاريلا.' },
-    { id: 38, name: 'Beef Mushroom Burger', nameAr: 'برغر لحم بالفطر', price: '$7.87', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Burger', description: 'Beef patty, Mushroom Sauce, Mayo sauce, Mozzarella Cheese.', descriptionAr: 'شريحة لحم بقري، صلصة فطر، صلصة مايونيز، جبنة الموزاريلا.' },
+    { id: 29, name: 'Lebanese Burger', nameAr: 'برغر لبناني', price: '$8.99', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Burger', description: 'Beef patty, garlic sauce, pickles, tomatoes, fries, served with coleslaw.', descriptionAr: 'شريحة لحم بقري، ثوم، كبيس، طماطم، بطاطس مقلية، يقدم مع سلطة الكول سلو.' },
+    { id: 30, name: 'Cheese Burger', nameAr: 'برغر بالجبنة', price: '$7.99', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Burger', description: 'Beef patty, cheddar cheese, lettuce, tomatoes, pickles, mayo sauce.', descriptionAr: 'شريحة لحم بقري، جبنة شيدر، خس، طماطم، كبيس، صلصة مايونيز.' },
+    { id: 31, name: 'Chicken Pesto Burger', nameAr: 'برغر دجاج بيستو', price: '$8.49', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Burger', description: 'Grilled chicken breast, pesto sauce, mozzarella cheese, lettuce, tomatoes.', descriptionAr: 'صدر دجاج مشوي، صلصة بيستو، جبنة موزاريلا، خس، طماطم.' },
+    { id: 32, name: 'Mushroom Burger', nameAr: 'برغر بالفطر', price: '$8.99', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Burger', description: 'Beef patty, sautéed mushrooms, Swiss cheese, caramelized onions, garlic sauce.', descriptionAr: 'شريحة لحم بقري، فطر مشوي، جبنة سويسرية، بصل مكرمل، صلصة ثوم.' },
+  ],
+  platters: [
+    { id: 33, name: 'Chicken Shawarma Platter', nameAr: 'طبق شاورما دجاج', price: '$6.18', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, pickles, Tomato, Garlic.', descriptionAr: 'يقدّم مع البطاطا المقلية، المخلل، الطماطم، الثوم.' },
+    { id: 34, name: 'Beef Shawarma Platter', nameAr: 'طبق شاورما لحمة', price: '$6.75', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with Tarator Sauce, Tomato, Debs reman, Onions, Parsley.', descriptionAr: 'يقدّم مع الطرطور، الطماطم، دبس الرمان، البصل والبقدونس.' },
+    { id: 35, name: 'Sejok Shawarma Platter', nameAr: 'طبق شاورما سجق', price: '$6.18', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, pickles, Tomato, Garlic.', descriptionAr: 'يقدّم مع البطاطا المقلية، المخلل، الطماطم، الثوم.' },
+    { id: 36, name: 'Crispy Platter Large', nameAr: 'طبق كرسبي كبير', price: '$10.11', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Grill', description: '6 Crispy Pcs Served with coleslaw, French Fries, garlic sauce, BBQ sauce, cheddar.', descriptionAr: '6 قطع كرسبي تقدّم مع سلطة الكول سلو، البطاطا المقلية، ثوم، الباربكيو، جبن الشيدر.' },
+    { id: 37, name: 'Crispy Platter Small', nameAr: 'طبق كرسبي صغير', price: '$7.87', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Grill', description: '4 Crispy Pcs Served with coleslaw, French Fries, garlic sauce, BBQ sauce, cheddar.', descriptionAr: '4 قطع كرسبي تقدّم مع سلطة الكول سلو، البطاطا المقلية، ثوم، الباربكيو، جبن الشيدر.' },
+    { id: 38, name: 'Steak Mushroom Platter', nameAr: 'طبق ستيك والفطر', price: '$14.61', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Kafta', description: 'Served with Fresh Mushroom Sauce, French Fries, Red lettuce.', descriptionAr: 'يقدّم مع صلصة الفطر الطازج، البطاطا المقلية، الخس الأحمر.' },
   ],
   salads: [
-    { id: 39, name: 'Chicken Ceaser Salad', nameAr: 'سلطة سيزر بالدجاج', price: '$', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Fattoush', description: 'Chicken, Lettuce, Cherry Tomatos, Croutons, Parmesan Cheese Served with Tio Dressing.', descriptionAr: 'دجاج، خس، طماطم كرزية، جبنة بارميزان، خبز محمص، يقدم مع صلصة تيو.' },
+    { id: 39, name: 'Chicken Ceaser Salad', nameAr: 'سلطة سيزر بالدجاج', price: '$', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Fattoush', description: 'Chicken, Lettuce, Cherry Tomatos, Parmesan Cheese Served with Tio Dressing.', descriptionAr: 'دجاج، خس، طماطم كرزية، جبنة بارميزان، يقدم مع صلصة تيو.' },
     { id: 40, name: 'Crab Salad', nameAr: 'سلطة الكراب', price: '$', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Tabbouleh', description: 'Crap, Carrot, Lettuce, Fresh Mushrooms, Avocado Served with Tio dressing.', descriptionAr: 'كراب، جزر، خس، فطر طازج، أفوكادو، يقدم مع صلصة تيو.' },
     { id: 41, name: 'Lebanese Salad', nameAr: 'سلطة لبنانية', price: '$', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Greek', description: 'Tomato, Lettuce, Cucumber, Mint Served with Lemon Dressing.', descriptionAr: 'طماطم، خس، خيار، نعناع، ​​يقدم مع صلصة الليمون.' },
   ],
@@ -159,6 +145,12 @@ function App() {
     return price.replace(/[$0-9.]/g, match => arabicNumbers[match] || match);
   };
 
+  const handleCategoryClick = (categoryId) => {
+    setActiveCategory(categoryId);
+    // Close modal when changing category
+    setSelectedItem(null);
+  };
+
   const handleItemClick = (item) => {
     // Don't show modal for addon, dips, and softdrinks categories
     if (noModalCategories.includes(activeCategory)) {
@@ -183,7 +175,7 @@ function App() {
             <button
               key={cat.id}
               className={`category-btn ${activeCategory === cat.id ? 'active' : ''}`}
-              onClick={() => setActiveCategory(cat.id)}
+              onClick={() => handleCategoryClick(cat.id)}
             >
               <span className="category-name">{cat.name}</span>
               <span className="category-name-ar">{cat.nameAr}</span>
@@ -198,7 +190,7 @@ function App() {
         </h2>
         
         <div className="menu-items">
-          {menuData[activeCategory].map(item => (
+          {menuData[activeCategory] && menuData[activeCategory].map(item => (
             <div
               key={item.id}
               className="menu-item"
