@@ -1,23 +1,246 @@
-import logo from './logo.svg';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
+// Import your local logo image
+import logo from './assets/logo.png';
+
+const menuData = {
+  shawarma: [
+    { id: 1, name: 'Chicken Shawarma Large', nameAr: 'شاورما دجاج كبير', price: '$4.5', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Shawarma', description: 'Chicken, Garlic sauce, French fries, pickles (Saj bread or Arabic bread).', descriptionAr: 'دجاج، ثوم، بطاطا مقلية، كبيس (خبز صاج أو الخبز عربي).' },
+    { id: 2, name: 'Chicken Shawarma Small', nameAr: 'شاورما دجاج صغير', price: '$3.37', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Shawarma', description: 'Chicken, Garlic sauce, French fries, pickles (Saj bread or Arabic bread).', descriptionAr: 'دجاج، ثوم، بطاطا مقلية، كبيس (خبز صاج أو الخبز عربي).' },
+    { id: 3, name: 'Beef Shawarma Large', nameAr: 'شاورما لحم كبير', price: '$5.62', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Shawarma', description: 'Beef, Tarator sauce, tomatoes, parsley, onions, pickles (Saj bread or Arabic Bread).', descriptionAr: 'لحم ، طرطور، طماطم، بقدونس، بصل، كبيس (خبز صاج أو خبز عربي).' },
+    { id: 4, name: 'Beef Shawarma Small', nameAr: 'شاورما لحم صغير', price: '$3.93', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Shawarma', description: 'Beef, Tarator sauce, tomatoes, parsley, onions, pickles (Saj bread or Arabic Bread).', descriptionAr: 'لحم ، طرطور، طماطم، بقدونس، بصل، كبيس (خبز صاج أو خبز عربي).' },
+    { id: 5, name: 'Sejok Shawarma Large', nameAr: 'شاورما سجق كبير', price: '$5.05', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Shawarma', description: 'Sejok, Garlic sauce, tomatoes, pickles.', descriptionAr: 'سجق، ثوم، طماطم، كبيس.' },
+    { id: 6, name: 'Sejok Shawarma Small', nameAr: 'شاورما سجق صغير', price: '$3.37', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Shawarma', description: 'Sejok, Garlic sauce, tomatoes, pickles.', descriptionAr: 'سجق، ثوم، طماطم، كبيس.' },
+    { id: 7, name: 'Sejok Shawarma Special', nameAr: 'شاورما سجق سبيشل', price: '$6.17', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Shawarma', description: 'Sejok, Garlic sauce, tomatoes, pickles, Mozzarella Cheese.', descriptionAr: 'سجق، ثوم، طماطم، كبيس، جبنة موزاريلا.' },
+    { id: 8, name: 'Turkey Chicken Shawarma', nameAr: 'شاورما دجاج تركي', price: '$6.17', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Shawarma', description: 'Chicken, Garlic, Mayo, Oregano, Tomato Sauce, lettuce, red cabbage.', descriptionAr: 'دجاج، ثوم، مايونيز، أوريجانو، صلصة طماطم، خس، ملفوف أحمر.' },
+    { id: 9, name: 'Turkey Beef Shawarma', nameAr: 'شاورما لحم تركي', price: '$6.74', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Shawarma', description: 'Beef, Garlic, Mayo, Oregano, Tomato Sauce, lettuce, red cabbage.', descriptionAr: 'لحم، ثوم، مايونيز، صلصة طماطم، أوريجانو، خس، ملفوف أحمر.' },
+    { id: 10, name: 'Turkey Sejok Shawarma', nameAr: 'شاورما سجق تركي', price: '$5.62', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Shawarma', description: 'Sejok, Garlic, Mayo, Oregano, Tomato Sauce, lettuce, red cabbage.', descriptionAr: 'سجق، ثوم، مايونيز، صلصة طماطم، أوريجانو، خس، ملفوف أحمر.' },
+  ],
+  snacks: [
+    { id: 11, name: 'Chicken Barbeque', nameAr: 'دجاج باربكيو', price: '$6.18', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Falafel', description: 'Chicken Barbeque, Mayo, Rocca, Fresh Mushrooms, Mozzarella Cheese.', descriptionAr: 'دجاج باربكيو، مايونيز، روكا، فطر طازج، جبنة موزاريلا.' },
+    { id: 12, name: 'Spicy Chicken', nameAr: 'دجاج حار', price: '$6.18', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Falafel', description: 'Spicy Chicken, Mayo, Lettuce, Rocca, Fresh Mushrooms, Mozzarella Cheese.', descriptionAr: 'دجاج حار، مايونيز، خس، روكا، فطر طازج، جبنة موزاريلا.' },
+    { id: 13, name: 'Chicken Sub', nameAr: 'دجاج', price: '$6.18', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Falafel', description: 'Chicken, Garlic sauce, coleslaw, cocktail sauce, BBQ sauce, French fries, cheddar.', descriptionAr: 'دجاج، ثوم، سلطة كول سلو، صلصة كوكتيل، باربكيو، بطاطا مقلية، جبنة الشيدر.' },
+    { id: 14, name: 'Mixed Mexican Chicken Sub', nameAr: 'دجاج مكسيكي مشكل', price: '$6.18', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Falafel', description: 'Chicken, Green pepper, onions, carrot, lettuce, mayo sauce, mozzarella cheese, soy sauce.', descriptionAr: 'دجاج، فلفل أخضر، بصل، جزر، خس، مايونيز، جبنة موزاريلا، صلصة صويا.' },
+    { id: 15, name: 'Crispy', nameAr: 'كرسبي', price: '$6.18', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Falafel', description: 'Crispy Chicken, Garlic sauce, coleslaw, cocktail sauce, BBQ sauce, French fries, cheddar.', descriptionAr: 'دجاج كرسبي، ثوم، سلطة كول سلو، كوكتيل، باربكيو، بطاطا مقلية، جبنة شيدر.' },
+    { id: 16, name: 'Fajita', nameAr: 'فاهيتا', price: '$6.18', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Falafel', description: 'Chicken, Green pepper, onions, corn, mozzarella cheese, avocado sauce, soy sauce.', descriptionAr: 'دجاج، فلفل أخضر، بصل، ذرة، جبنة موزاريلا، صلصة أفوكادو، صلصة صويا.' },
+    { id: 17, name: 'Zinger (Chicken)', nameAr: 'زنجر (دجاج)', price: '$6.18', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Falafel', description: 'Chicken, Mayo sauce, lettuce, tomatoes, cheddar cheese, jalapeño.', descriptionAr: 'دجاج، صلصة مايونيز، خس، طماطم، جبنة شيدر، هالبينو.' },
+    { id: 18, name: 'Escalope', nameAr: 'إسكالوب', price: '$6.18', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Falafel', description: 'Chicken, Mayo sauce, lettuce, tomatoes, ketchup, Mozzarella Cheese.', descriptionAr: 'دجاج، صلصة مايونيز، خس، طماطم، كاتشب، جبنة موزاريلا.' },
+    { id: 19, name: 'Francisco', nameAr: 'فرانسيسكو', price: '$6.18', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Falafel', description: 'Chicken, Mayo, Pickles, Lettuce, Corn, Soya Sauce, Mozzarella Cheese.', descriptionAr: 'دجاج، مايونيز، كبيس، خس، ذرة، صلصة صويا، جبنة موزاريلا.' },
+    { id: 20, name: 'Tawook', nameAr: 'طاووق', price: '$5.05', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Falafel', description: 'Tawook, Garlic sauce, French fries, pickles, coleslaw', descriptionAr: 'طاووق، ثوم، بطاطا مقلية، كبيس، سلطة كول سلو' },
+    { id: 21, name: 'Chicken Sawda', nameAr: 'سودة دجاج', price: '$5.05', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Falafel', description: 'Chicken Sawda, Sawda, Garlic, Pickles, Tomato, Debs Reman.', descriptionAr: 'دجاج سودة، سودة، ثوم، كبيس، طماطم، دبس الرمان.' },
+    { id: 22, name: 'Philadelphia Beef', nameAr: 'فيلادلفيا لحم', price: '$7.87', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Falafel', description: 'Beef, Green pepper, onions, mushrooms, mayo sauce, Mozzarella Cheese.', descriptionAr: 'لحم بقري، فلفل أخضر، بصل، فطر، صلصة مايونيز، جبنة موزاريلا.' },
+    { id: 23, name: 'Steak', nameAr: 'ستيك', price: '$7.87', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Falafel', description: 'Steak, Mozzarella Cheese, and onion.', descriptionAr: 'ستيك لحم، جبنة موزاريلا، وبصل.' },
+    { id: 24, name: 'Rosto', nameAr: 'روستو', price: '$7.87', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Falafel', description: 'Rosto, Mayo, Lettuce, pickles, tomato, mustard, corn.', descriptionAr: 'روستو، مايونيز، خس، كبيس، طماطم، خردل، ذرة.' },
+    { id: 25, name: 'Makanek', nameAr: 'مقانق', price: '$6.18', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Falafel', description: 'Makanek, Mayo, Pickles, Tomato, Debs Reman.', descriptionAr: 'مقانق، مايونيز، كبيس، طماطم، دبس الرمان.' },
+    { id: 26, name: 'Crab', nameAr: 'كراب', price: '$6.75', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Falafel', description: 'Crab, Mayo, Lettuce, pickles, Soya Sauce, Cocktail Sauce.', descriptionAr: 'كراب، مايونيز، خس، كبيس، صلصة صويا، صلصة كوكتيل.' },
+    { id: 27, name: 'Shrimps', nameAr: 'قريدس', price: '$6.75', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Falafel', description: 'Shrimps, Mayo, Lettuce, pickles, Soya Sauce, Cocktail Sauce.', descriptionAr: 'قريدس، مايونيز، خس، كبيس، صلصة صويا، صلصة كوكتيل.' },
+    { id: 28, name: 'Crab & Shrimps', nameAr: 'كراب & قريدس', price: '$6.75', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Falafel', description: 'Crab & Shrimps, Mayo, Lettuce, pickles, Soya Sauce, Cocktail Sauce.', descriptionAr: 'كراب وقريدس، مايونيز، خس، كبيس، صلصة الصويا، صلصة كوكتيل.' },
+  ],
+  platters: [
+    { id: 29, name: 'Chicken Shawarma Tabliye', nameAr: 'طبلية شاورما دجاج', price: '$6.18', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, pickles, Garlic.', descriptionAr: 'يقدّم مع بطاطا مقلية، كبيس، ثوم.' },
+    { id: 30, name: 'Beef Shawarma Tabliye', nameAr: 'طبلية شاورما لحمة', price: '$6.75', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with Tarator Sauce, Tomato, Debs reman, Onions, Parsley.', descriptionAr: 'يقدّم مع طرطور، طماطم، دبس الرمان، بصل وبقدونس.' },
+    { id: 31, name: 'Sejok Shawarma Tabliye', nameAr: 'طبلية شاورما سجق', price: '$6.18', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, pickles, Tomato, Garlic.', descriptionAr: 'يقدّم مع بطاطا مقلية، كبيس، طماطم، ثوم.' },
+    { id: 29, name: 'Chicken Shawarma Platter 250g', nameAr: 'طبق شاورما دجاج 250غ', price: '$9', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, pickles, Garlic.', descriptionAr: 'يقدّم مع بطاطا مقلية، كبيس، ثوم.' },
+    { id: 29, name: 'Chicken Shawarma Platter 500g', nameAr: 'طبق شاورما دجاج 500غ', price: '$18', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, pickles, Garlic.', descriptionAr: 'يقدّم مع بطاطا مقلية، كبيس، ثوم.' },
+    { id: 29, name: 'Chicken Shawarma Platter 1Kg', nameAr: 'طبق شاورما دجاج 1كغ', price: '$33.70', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, pickles, Garlic.', descriptionAr: 'يقدّم مع بطاطا مقلية، كبيس، ثوم.' },
+    { id: 30, name: 'Beef Shawarma Platter 250g', nameAr: 'طبق شاورما لحمة 250غ', price: '$12.36', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, Tarator Sauce, Tomato, Debs reman, Onions, Parsley.', descriptionAr: 'يقدّم مع بطاطا مقلية، طرطور، طماطم، دبس الرمان، بصل وبقدونس.' },
+    { id: 30, name: 'Beef Shawarma Platter 500g', nameAr: 'طبق شاورما لحمة 500غ', price: '$20.23', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, Tarator Sauce, Tomato, Debs reman, Onions, Parsley.', descriptionAr: 'يقدّم مع بطاطا مقلية، طرطور، طماطم، دبس الرمان، بصل وبقدونس.' },
+    { id: 30, name: 'Beef Shawarma Platter 1Kg', nameAr: 'طبق شاورما لحمة 1كغ', price: '$39.33', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, Tarator Sauce, Tomato, Debs reman, Onions, Parsley.', descriptionAr: 'يقدّم مع بطاطا مقلية، طرطور، طماطم، دبس الرمان، بصل وبقدونس.' },
+    { id: 29, name: 'Sejok Shawarma Platter 250g', nameAr: 'طبق شاورما دجاج 250غ', price: '$10.11', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, Tomato, pickles, Garlic.', descriptionAr: 'يقدّم مع بطاطا مقلية، طماطم، كبيس، ثوم.' },
+    { id: 29, name: 'Sejok Shawarma Platter 500g', nameAr: 'طبق شاورما دجاج 500غ', price: '$20.22', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, Tomato, pickles, Garlic.', descriptionAr: 'يقدّم مع بطاطا مقلية، طماطم، كبيس، ثوم.' },
+    { id: 29, name: 'Sejok Shawarma Platter 1Kg', nameAr: 'طبق شاورما دجاج 1كغ', price: '$39.33', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Platter', description: 'Served with French Fries, Tomato, pickles, Garlic.', descriptionAr: 'يقدّم مع بطاطا مقلية، طماطم، كبيس، ثوم.' },
+    { id: 32, name: 'Crispy Platter Large', nameAr: 'طبق كرسبي كبير', price: '$10.11', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Grill', description: '6 Crispy Pcs Served with coleslaw, French Fries, garlic sauce, BBQ sauce, cheddar.', descriptionAr: '6 قطع كرسبي تقدّم مع سلطة الكول سلو، بطاطا مقلية، ثوم، صوص باربكيو، جبن الشيدر.' },
+    { id: 33, name: 'Crispy Platter Small', nameAr: 'طبق كرسبي صغير', price: '$7.87', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Grill', description: '4 Crispy Pcs Served with coleslaw, French Fries, garlic sauce, BBQ sauce, cheddar.', descriptionAr: '4 قطع كرسبي تقدّم مع سلطة الكول سلو، بطاطا مقلية، ثوم، صوص باربكيو، جبن الشيدر.' },
+    { id: 34, name: 'Steak Mushroom Platter', nameAr: 'طبق ستيك والفطر', price: '$14.61', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Kafta', description: 'Served with Fresh Mushroom Sauce, French Fries, Red lettuce.', descriptionAr: 'يقدّم مع صلصة الفطر الطازج، بطاطا مقلية، الخس الأحمر.' },
+    { id: 34, name: 'Tawook Platter', nameAr: 'طبق طاووق', price: '$10.11', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Kafta', description: '300g Tawook Served with French Fries, Garlic sauce, pickles.', descriptionAr: '300غ طاووق تقدم مع بطاطا مقلية، ثوم، كبيس ' },
+    { id: 34, name: 'Sawda Platter', nameAr: 'طبق سودة', price: '$10.11', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Kafta', description: '300g Chicken Sawda Served with French Fries, Garlic sauce, pickles, Debs reman.', descriptionAr: '300غ سودة دجاج تقدم مع بطاطا مقلية، ثوم، كبيس و دبس الرمان دبس.' },
+    { id: 34, name: 'Chicken Breast Platter', nameAr: 'طبق صدر دجاج', price: '$14.61', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Kafta', description: '4 Grilled Chicken Pcs Served with Vegetable salad, Special sauce, garlic sauce.', descriptionAr: 'أربع قطع دجاج مشوي تقدم مع سلطة خضار، وصلصة خاصة، وصلصة ثوم.' },
+    { id: 34, name: 'Escalop Platter', nameAr: 'طبق اسكالوب', price: '$10.11', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Kafta', description: '2 Escalop pcs Served with French Fries, coleslaw, Ketchup, Cheddar Cheese.', descriptionAr: 'قطعتان من اسكالوب تقدم مع البطاطس المقلية، وسلطة الكول سلو، كاتشب، جبنة الشيدر.' },    
+  ],
+  burgers: [
+    { id: 35, name: 'Lebanese Burger', nameAr: 'برغر لبناني', price: '$5.06', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Burger', description: 'Beef patty, Mayo Sauce, Coleslaw, Mustard, Ketchup, French fries, Grilled Tomato and Onions.', descriptionAr: 'شريحة لحم بقري، صلصة مايونيز، سلطة كول سلو، خردل، كاتشب، بطاطا مقلية، طماطم وبصل مشوي.' },
+    { id: 36, name: 'Cheese Burger', nameAr: 'برغر بالجبنة', price: '$5.62', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Burger', description: 'Beef patty, Mayo Sauce, Coleslaw, Mustard, Ketchup, French fries, Grilled Tomato and Onions, Mozzarella Cheese.', descriptionAr: 'شريحة لحم بقري، صلصة مايونيز، سلطة كول سلو، خردل، كاتشب، بطاطا مقلية، طماطم وبصل مشوي، جبنة موزاريلا.' },
+    { id: 37, name: 'Chicken Pesto Burger', nameAr: 'برغر دجاج بيستو', price: '$6.74', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Burger', description: 'Grilled chicken breast, pesto sauce, Avocado Sauce.', descriptionAr: 'صدر دجاج مشوي، صلصة بيستو، صلصة أفوكادو.' },
+    { id: 38, name: 'Chicken Mushroom Burger', nameAr: 'برغر دجاج بالفطر', price: '$6.74', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Burger', description: 'Grilled Chicken Breast, Mushroom Sauce, Mayo sauce, Mozzarella Cheese.', descriptionAr: 'صدر دجاج مشوي، صلصة الفطر، صلصة المايونيز، جبنة الموزاريلا.' },
+    { id: 38, name: 'Beef Mushroom Burger', nameAr: 'برغر لحم بالفطر', price: '$7.87', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Burger', description: 'Beef patty, Mushroom Sauce, Mayo sauce, Mozzarella Cheese.', descriptionAr: 'شريحة لحم بقري، صلصة فطر، صلصة مايونيز، جبنة الموزاريلا.' },
+  ],
+  salads: [
+    { id: 39, name: 'Chicken Ceaser Salad', nameAr: 'سلطة سيزر بالدجاج', price: '$', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Fattoush', description: 'Chicken, Lettuce, Cherry Tomatos, Croutons, Parmesan Cheese Served with Tio Dressing.', descriptionAr: 'دجاج، خس، طماطم كرزية، جبنة بارميزان، خبز محمص، يقدم مع صلصة تيو.' },
+    { id: 40, name: 'Crab Salad', nameAr: 'سلطة الكراب', price: '$', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Tabbouleh', description: 'Crap, Carrot, Lettuce, Fresh Mushrooms, Avocado Served with Tio dressing.', descriptionAr: 'كراب، جزر، خس، فطر طازج، أفوكادو، يقدم مع صلصة تيو.' },
+    { id: 41, name: 'Lebanese Salad', nameAr: 'سلطة لبنانية', price: '$', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Greek', description: 'Tomato, Lettuce, Cucumber, Mint Served with Lemon Dressing.', descriptionAr: 'طماطم، خس، خيار، نعناع، ​​يقدم مع صلصة الليمون.' },
+  ],
+  addon: [
+    { id: 42, name: 'Frensh Fries (Large)', nameAr: 'بطاطس مقلية (كبيرة)', price: '$5.62', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Garlic', description: 'Crispy French Fries', descriptionAr: 'بطاطس مقلية مقرمشة' },
+    { id: 43, name: 'Frensh Fries (Small)', nameAr: 'بطاطس مقلية (صغيرة)', price: '$3.37', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Tahini', description: 'Crispy French Fries', descriptionAr: 'بطاطس مقلية مقرمشة' },
+    { id: 44, name: 'Mozzarella Sticks', nameAr: 'أصابع الموزاريلا', price: '$3.93', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Pickles', description: '6 pcs of Mozzarella Sticks served with marinara sauce', descriptionAr: 'أصابع موزاريلا مقرمشة تقدم مع صلصة المارينارا' },
+    { id: 45, name: 'Onion Rings', nameAr: 'حلقات البصل', price: '$3.93', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Fries', description: '9 pcs of Crispy Onion Rings', descriptionAr: 'حلقات بصل مقرمشة' },
+  ],
+  dips: [
+    { id: 46, name: 'Cheddar', nameAr: 'شيدر', price: '$0.79', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Hummus', description: 'Cheddar Cheese Sauce', descriptionAr: 'صلصة جبنة الشيدر' },
+    { id: 47, name: 'Honey Mustard', nameAr: 'خردل بالعسل', price: '$0.56', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Baba', description: 'Honey Mustard Sauce', descriptionAr: 'صلصة الخردل بالعسل' },
+    { id: 48, name: 'Garlic', nameAr: 'ثوم', price: '$0.56', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Moutabal', description: 'Creamy Garlic Sauce', descriptionAr: 'صلصة ثوم كريمية' },
+    { id: 49, name: 'Barbeque Sauce', nameAr: 'صوص باربكيو', price: '$0.56', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Labneh', description: 'BBQ Sauce', descriptionAr: 'صلصة باربكيو' },
+    { id: 50, name: 'Cocktail Sauce', nameAr: 'صوص كوكتيل', price: '$0.56', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Labneh', description: 'Cocktail Sauce', descriptionAr: 'صلصة كوكتيل' },
+    { id: 51, name: 'Sertcha Sauce', nameAr: 'صوص سريراتشا', price: '$0.56', image: 'https://via.placeholder.com/80x80/6B8E23/ffffff?text=Muhammara', description: 'Sriracha Sauce', descriptionAr: 'صلصة سريراتشا' },
+  ],
+  softdrinks: [
+    { id: 52, name: 'Pepsi', nameAr: 'بيبسي', price: '$1.13', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Coke', description: 'Pepsi Cola', descriptionAr: 'بيبسي كولا' },
+    { id: 53, name: '7 up', nameAr: 'سفن أب', price: '$1.13', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Diet', description: '7 Up Lemon Soda', descriptionAr: 'سفن أب' },
+    { id: 54, name: 'Meranda', nameAr: 'ميراندا', price: '$1.13', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Sprite', description: 'Orange Soda', descriptionAr: 'ميراندا برتقال' },
+    { id: 55, name: 'Ayran', nameAr: 'عيران', price: '$0.90', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Fanta', description: 'Yogurt Drink', descriptionAr: 'عيران' },
+    { id: 56, name: 'Ice Tea', nameAr: 'شاي مثلج', price: '$1.13', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Water', description: 'Iced Tea', descriptionAr: 'شاي مثلج' },
+    { id: 57, name: 'Water', nameAr: 'ماء', price: '$0.34', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Sparkling', description: 'Mineral Water', descriptionAr: 'ماء معدني' },
+  ],
+  combos: [
+    { id: 58, name: 'Snacks Combo add on', nameAr: 'اضافة سناك كومبو', price: '$3.37', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Combo', description: 'Any Snack Sandwich Served With French Fries, Salad and any Soft Drink.', descriptionAr: 'أي سناك ساندويتش يُقدم مع بطاطس مقلية، سلطة وأي مشروب غازي.' },
+  ],
+  offers: [
+   { id: 59, name: 'Snacks Combo add on', nameAr: 'اضافة سناك كومبو', price: '$2.24', image: 'https://via.placeholder.com/80x80/E53935/ffffff?text=Combo', description: 'Any Snack Sandwich Served With French Fries, Salad and any Soft Drink.', descriptionAr: 'أي سناك ساندويتش يُقدم مع بطاطس مقلية، سلطة وأي مشروب غازي.' },
+  ]
+};
 
 function App() {
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [activeCategory, setActiveCategory] = useState('shawarma');
+  const [isSticky, setIsSticky] = useState(false);
+  const stickyRef = useRef(null);
+
+  const categories = [
+    { id: 'shawarma', name: 'Shawarma Sandwiches', nameAr: 'شاورما' },
+    { id: 'snacks', name: 'Snacks Sandwiches', nameAr: 'سناك' },
+    { id: 'burgers', name: 'Burgers', nameAr: 'برغر' },
+    { id: 'platters', name: 'Platters', nameAr: 'أطباق' },
+    { id: 'combos', name: 'Snacks Combos', nameAr: 'سناك كومبو' },
+    { id: 'offers', name: 'Special Offers', nameAr: 'عروض خاصة' },
+    { id: 'salads', name: 'Salads', nameAr: 'سلطات' },
+    { id: 'addon', name: 'Add On', nameAr: 'إضافات' },
+    { id: 'dips', name: 'Dips', nameAr: 'مقبلات' },
+    { id: 'softdrinks', name: 'Soft Drinks', nameAr: 'مشروبات غازية' },
+  ];
+
+  // Categories that should NOT show modal on click
+  const noModalCategories = ['addon', 'dips', 'softdrinks'];
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsSticky(!entry.isIntersecting);
+      },
+      { threshold: [1], rootMargin: '-1px 0px 0px 0px' }
+    );
+
+    if (stickyRef.current) {
+      observer.observe(stickyRef.current);
+    }
+
+    return () => {
+      if (stickyRef.current) {
+        observer.unobserve(stickyRef.current);
+      }
+    };
+  }, []);
+
+  const formatArabicPrice = (price) => {
+    const arabicNumbers = {
+      '$': '',
+      '0': '٠',
+      '1': '١',
+      '2': '٢',
+      '3': '٣',
+      '4': '٤',
+      '5': '٥',
+      '6': '٦',
+      '7': '٧',
+      '8': '٨',
+      '9': '٩',
+      '.': '٫'
+    };
+    
+    return price.replace(/[$0-9.]/g, match => arabicNumbers[match] || match);
+  };
+
+  const handleItemClick = (item) => {
+    // Don't show modal for addon, dips, and softdrinks categories
+    if (noModalCategories.includes(activeCategory)) {
+      return;
+    }
+    setSelectedItem(item);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="app">
+      <header className="header">
+        <img src={logo} alt="Tio Gordo" className="logo" />
       </header>
+
+      {/* Sticky navigation with blur effect when sticky */}
+      <div 
+        ref={stickyRef}
+        className={`sticky-wrapper ${isSticky ? 'sticky' : ''}`}
+      >
+        <nav className="category-nav">
+          {categories.map(cat => (
+            <button
+              key={cat.id}
+              className={`category-btn ${activeCategory === cat.id ? 'active' : ''}`}
+              onClick={() => setActiveCategory(cat.id)}
+            >
+              <span className="category-name">{cat.name}</span>
+              <span className="category-name-ar">{cat.nameAr}</span>
+            </button>
+          ))}
+        </nav>
+      </div>
+
+      <main className="menu-container">
+        <h2 className="category-title">
+          {categories.find(c => c.id === activeCategory)?.name}
+        </h2>
+        
+        <div className="menu-items">
+          {menuData[activeCategory].map(item => (
+            <div
+              key={item.id}
+              className="menu-item"
+              onClick={() => handleItemClick(item)}
+            >
+              <div className="item-image">
+                <img src={item.image} alt={item.name} />
+              </div>
+              <div className="item-names">
+                <div className="item-name-en">{item.name}</div>
+                <div className="item-name-ar">{item.nameAr}</div>
+              </div>
+              <div className="item-price">{item.price}</div>
+            </div>
+          ))}
+        </div>
+      </main>
+
+      {selectedItem && (
+        <div className="modal-overlay" onClick={() => setSelectedItem(null)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setSelectedItem(null)}>×</button>
+            <div className="modal-image">
+              <img src={selectedItem.image} alt={selectedItem.name} />
+            </div>
+            <div className="modal-details">
+              <h3 className="modal-name-en">{selectedItem.name}</h3>
+              <h3 className="modal-name-ar">{selectedItem.nameAr}</h3>
+              <div className="modal-description">
+                <p className="modal-description-en">{selectedItem.description}</p>
+                <p className="modal-description-ar">{selectedItem.descriptionAr}</p>
+              </div>
+              <div className="modal-price">
+                <span className="modal-price-en">{selectedItem.price}</span>
+                <span className="modal-price-ar">
+                  {formatArabicPrice(selectedItem.price)} دولار
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
