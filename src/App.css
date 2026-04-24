@@ -164,7 +164,6 @@ body::before {
   background: transparent;
 }
 
-/* Fixed category text wrapping - prevents "s" on new line */
 .category-name {
   font-size: 0.7rem;
   font-weight: 600;
@@ -178,7 +177,7 @@ body::before {
   line-height: 1.2;
   margin-bottom: 2px;
   overflow-wrap: break-word;
-  word-break: keep-all; /* Prevents breaking words like "Sandwiches" */
+  word-break: keep-all;
 }
 
 .category-name-ar {
@@ -265,10 +264,11 @@ body::before {
   background: rgba(184, 177, 169, 0.35);
 }
 
+/* SQUARE IMAGES - changed from circle to square */
 .item-image {
   width: 70px;
   height: 70px;
-  border-radius: 10px;
+  border-radius: 12px; /* Square with slight rounded corners */
   overflow: hidden;
   flex-shrink: 0;
   border: 2px solid #fff;
@@ -287,10 +287,10 @@ body::before {
   overflow: hidden;
 }
 
-/* FIXED: Smaller font for English titles on all screens */
+/* BOLDER TEXT - increased font weight */
 .item-name-en {
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 800; /* Changed from 600 to 800 for bolder text */
   color: #E53935;
   margin-bottom: 0.2rem;
   white-space: normal;
@@ -308,7 +308,7 @@ body::before {
 
 .item-name-ar {
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 700; /* Changed from 500 to 700 for bolder text */
   color: #E53935;
   direction: rtl;
   white-space: normal;
@@ -325,7 +325,7 @@ body::before {
 
 .item-price {
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700; /* Made price bolder as well */
   color: #6B8E23;
   padding: 0.3rem 0.7rem;
   background: rgba(255, 255, 255, 0.3);
@@ -396,7 +396,7 @@ body::before {
 .modal-image {
   width: 150px;
   height: 150px;
-  border-radius: 50%;
+  border-radius: 12px; /* Changed to square for modal image as well */
   overflow: hidden;
   margin: 0 auto 1.5rem;
   border: 4px solid #E53935;
@@ -419,7 +419,7 @@ body::before {
   font-size: 1.8rem;
   color: #E53935;
   margin-bottom: 0.3rem;
-  font-weight: 600;
+  font-weight: 800; /* Made bolder */
   letter-spacing: 0.5px;
   word-wrap: break-word;
   white-space: normal;
@@ -430,7 +430,7 @@ body::before {
   color: #E53935;
   margin-bottom: 1rem;
   direction: rtl;
-  font-weight: 600;
+  font-weight: 700; /* Made bolder */
   word-wrap: break-word;
   white-space: normal;
 }
@@ -479,7 +479,7 @@ body::before {
 
 .modal-price-en {
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700; /* Made bolder */
   color: #6B8E23;
   letter-spacing: 0.5px;
   white-space: nowrap;
@@ -487,7 +487,7 @@ body::before {
 
 .modal-price-ar {
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700; /* Made bolder */
   color: #6B8E23;
   direction: rtl;
   white-space: nowrap;
@@ -525,7 +525,6 @@ body::before {
     font-size: 0.58rem;
   }
   
-  /* Smaller font for English titles on tablet */
   .item-name-en {
     font-size: 0.85rem;
   }
@@ -564,7 +563,6 @@ body::before {
     font-size: 0.55rem;
   }
   
-  /* Smaller font for English titles on mobile */
   .item-name-en {
     font-size: 0.8rem;
   }
@@ -649,14 +647,15 @@ body::before {
     gap: 0.6rem;
   }
 
-  /* Even smaller font for English titles on small phones */
   .item-name-en {
     font-size: 0.75rem;
+    font-weight: 800;
     -webkit-line-clamp: 2;
   }
 
   .item-name-ar {
     font-size: 0.7rem;
+    font-weight: 700;
     -webkit-line-clamp: 2;
   }
   
