@@ -226,7 +226,7 @@ function App() {
               <div className="modal-price">
                 <span className="modal-price-en">{selectedItem.price}</span>
                 <span className="modal-price-ar">
-                  {formatArabicPrice(selectedItem.price)} دولار
+                  {formatArabicPrice(selectedItem.price)}
                 </span>
               </div>
             </div>
